@@ -38,4 +38,16 @@ class LoginTest {
     fun test_loginWithCredentials_correctCredentials_success() {
         assert(false)
     }
+
+    @Test
+    fun test_loginWithStoredCredentials_expired_failed() {
+        assert(false)
+
+    }
+
+    @Test
+    fun test_loginWithStoredCredentials_NotExpired_success() {
+
+        assert(false)
+    }
 }
