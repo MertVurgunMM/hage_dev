@@ -1,4 +1,4 @@
-package com.practice.hagekotlin.di
+package com.practice.hagekotlin
 
 import com.practice.hagekotlin.login.AccountRepository
 import com.practice.hagekotlin.login.AccountRepositoryImpl
@@ -7,8 +7,7 @@ import com.practice.hagekotlin.network.ServiceBuilder
 import com.practice.hagekotlin.properties.Constant
 import org.koin.dsl.module
 
-val appModule = module {
-
-    single<AccountService> { ServiceBuilder.build(Constant.BASE_URL, AccountService::class.java) }
+val testNetworkModule = module {
+    single { ServiceBuilder.build(Constant.BASE_URL_STAGING, AccountService::class.java) }
     single<AccountRepository> { AccountRepositoryImpl(get()) }
 }

@@ -1,16 +1,41 @@
 package com.practice.hagekotlin.login
 
 import com.practice.hagekotlin.network.AccountService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-interface AccountRepository
+interface AccountRepository {
+    suspend fun login(firstName: String?, lastName: String?, personalNo: String?): Boolean
+}
 
-class AccountRepositoryImpl(private val service: AccountService) {
+class AccountRepositoryImpl(private val service: AccountService) : AccountRepository {
 
-    fun login(firstName: String?, lastName: String?, personalNo: String?) {
+    override suspend fun login(firstName: String?, lastName: String?, personalNo: String?) =
+        withContext(Dispatchers.IO) {
 
-        if (firstName.isNullOrEmpty() || lastName.isNullOrEmpty() || personalNo.isNullOrEmpty())
-            error("Credentials missing!")
+            when {
+                firstName.isNullOrEmpty() ->
+                    throw CredentialsMissingException(CredentialsMissingException.Type.FIRST_NAME)
+                lastName.isNullOrEmpty() ->
+                    throw CredentialsMissingException(CredentialsMissingException.Type.LAST_NAME)
+                personalNo.isNullOrEmpty() ->
+                    throw CredentialsMissingException(CredentialsMissingException.Type.PERSONAL_NO)
+                else -> {
+                    val response = service.login(firstName, lastName, personalNo)
 
-        //service.login()
+                    if (!response.success) {
+                        throw UserNotFoundException(response.error.toString())
+                    }
+                    return@withContext response.success
+                }
+            }
+        }
+}
+
+class CredentialsMissingException(val type: Type) : Exception() {
+    enum class Type {
+        FIRST_NAME, LAST_NAME, PERSONAL_NO
     }
 }
+
+class UserNotFoundException(val error: String) : Exception()

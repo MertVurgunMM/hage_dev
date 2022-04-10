@@ -44,6 +44,9 @@ dependencies {
 
     def koin_version = "3.1.6"
     def retrofit_version = "2.9.0"
+    def coroutine_version = "1.5.2"
+    def coroutine_test_version = "1.6.1"
+    def lifecycle_version = "2.4.1"
     //DI
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
@@ -54,6 +57,15 @@ dependencies {
     testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
 
     //Network
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
+
+    //Kotlin
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version")
+    //Test-Kotlin
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version")
+
+    //Arch
+    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
 }
