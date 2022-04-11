@@ -9,5 +9,5 @@ import org.koin.dsl.module
 
 val testNetworkModule = module {
     single { ServiceBuilder.build(Constant.BASE_URL_STAGING, AccountService::class.java) }
-    single<AccountRepository> { AccountRepositoryImpl(get()) }
+    single<AccountRepository> { AccountRepositoryImpl(get(), get()) }
 }

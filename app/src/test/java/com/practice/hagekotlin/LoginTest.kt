@@ -126,7 +126,7 @@ class LoginTest : KoinTest {
     }
 
     @Test
-    fun test_loginWithStoredCredentials_NotExpired_success() {
+    fun test_loginWithStoredCredentials_notExpired_success() {
         assert(false)
     }
 
