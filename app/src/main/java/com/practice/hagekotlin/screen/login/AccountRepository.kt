@@ -1,7 +1,7 @@
-package com.practice.hagekotlin.login
+package com.practice.hagekotlin.screen.login
 
 import com.practice.hagekotlin.network.AccountService
-import com.practice.hagekotlin.storage.CredentialsStore
+import com.practice.hagekotlin.storage.Credentials
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -11,7 +11,7 @@ interface AccountRepository {
 
 class AccountRepositoryImpl(
     private val service: AccountService,
-    private val credentialsStore: CredentialsStore
+    private val credentials: Credentials
 ) : AccountRepository {
 
     override suspend fun login(firstName: String?, lastName: String?, personalNo: String?) =
@@ -30,7 +30,7 @@ class AccountRepositoryImpl(
                     if (!response.success) {
                         throw UserNotFoundException(response.error.toString())
                     }
-                    credentialsStore.put(firstName, lastName, personalNo)
+                    credentials.put(firstName, lastName, personalNo)
                     return@withContext response.success
                 }
             }

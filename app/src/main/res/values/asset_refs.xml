@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="FILENAME_CATEGORIES">categories.json</string>
+    <string name="FILENAME_CONTENTS">contents.json</string>
+    <string name="FILENAME_LOGS">logs.json</string>
+</resources>

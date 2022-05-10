@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">HageKotlin</string>
+    <string name="app_name">HaGe LOGISTIK Fahrerhandbuch</string>
+
+    <string name="first_name">Vorname</string>
+    <string name="last_name">Nachname</string>
+    <string name="personal_number">Personalnummer</string>
+    <string name="sing_in">Anmelden</string>
+
+    <string name="error_no_connection">Es konnte keine Verbindung zum Server hergestellt werden. Bitte stellen Sie sicher, dass sie eine Verbindung zum Internet haben.</string>
+    <string name="error_timeout">Der Server braucht zu lange, um zu antworten. Bitte versuchen Sie es später erneut.</string>
+    <string name="error_no_user">Die Nutzerdaten wurden nicht in unser Datenbank gefunden.</string>
+
+    <string name="categories">Inhalt</string>
+    <string name="category">Kategorie</string>
+    <string name="category_content_name">Kategorie %1$s</string>
+    <string name="changes">Änderungen</string>
+    <string name="logout">Abmelden</string>
+    <string name="welcome">Willkommen %1$s %2$s</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="message_logout">Wollen Sie sich wirklich abmelden?</string>
+    <string name="logout_success">Sie haben sich erfolgreich abgemeldet.</string>
+
 </resources>

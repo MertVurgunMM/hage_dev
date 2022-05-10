@@ -1,8 +1,7 @@
 package com.practice.hagekotlin
 
-import com.practice.hagekotlin.login.AccountRepository
-import com.practice.hagekotlin.login.CredentialsMissingException
-import com.practice.hagekotlin.login.UserNotFoundException
+import com.practice.hagekotlin.screen.login.AccountRepository
+import com.practice.hagekotlin.screen.login.CredentialsMissingException.Type
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -10,6 +9,8 @@ import org.junit.Test
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 import org.koin.test.inject
+import com.practice.hagekotlin.screen.login.CredentialsMissingException as CredentialError
+import com.practice.hagekotlin.screen.login.UserNotFoundException as UserNotFound
 
 @ExperimentalCoroutinesApi // runTest function
 class LoginTest : KoinTest {
@@ -29,9 +30,9 @@ class LoginTest : KoinTest {
                 lastName = TEST_USER_LAST_NAME,
                 personalNo = TEST_USER_PERSONAL_NO
             )
-        } catch (e: Exception) {
-            assert(e is CredentialsMissingException)
-            assert((e as CredentialsMissingException).type == CredentialsMissingException.Type.FIRST_NAME)
+        } catch (error: Exception) {
+            assert(error is CredentialError)
+            assert((error as CredentialError).type == Type.FIRST_NAME)
         }
     }
 
@@ -43,9 +44,9 @@ class LoginTest : KoinTest {
                 lastName = null,
                 personalNo = TEST_USER_PERSONAL_NO
             )
-        } catch (e: Exception) {
-            assert(e is CredentialsMissingException)
-            assert((e as CredentialsMissingException).type == CredentialsMissingException.Type.LAST_NAME)
+        } catch (error: Exception) {
+            assert(error is CredentialError)
+            assert((error as CredentialError).type == Type.LAST_NAME)
         }
     }
 
@@ -57,9 +58,9 @@ class LoginTest : KoinTest {
                 lastName = TEST_USER_LAST_NAME,
                 personalNo = null
             )
-        } catch (e: Exception) {
-            assert(e is CredentialsMissingException)
-            assert((e as CredentialsMissingException).type == CredentialsMissingException.Type.PERSONAL_NO)
+        } catch (error: Exception) {
+            assert(error is CredentialError)
+            assert((error as CredentialError).type == Type.PERSONAL_NO)
         }
     }
 
@@ -71,9 +72,9 @@ class LoginTest : KoinTest {
                 lastName = TEST_USER_LAST_NAME,
                 personalNo = TEST_USER_PERSONAL_NO
             )
-        } catch (e: Exception) {
-            assert(e is UserNotFoundException)
-            e.printStackTrace()
+        } catch (error: Exception) {
+            assert(error is UserNotFound)
+            error.printStackTrace()
         }
     }
 
@@ -86,7 +87,7 @@ class LoginTest : KoinTest {
                 personalNo = TEST_USER_PERSONAL_NO
             )
         } catch (e: Exception) {
-            assert(e is UserNotFoundException)
+            assert(e is UserNotFound)
             e.printStackTrace()
         }
     }
@@ -99,9 +100,9 @@ class LoginTest : KoinTest {
                 lastName = TEST_USER_LAST_NAME,
                 personalNo = FAULTY_CREDENTIAL
             )
-        } catch (e: Exception) {
-            assert(e is UserNotFoundException)
-            e.printStackTrace()
+        } catch (error: Exception) {
+            assert(error is UserNotFound)
+            error.printStackTrace()
         }
     }
 
@@ -117,17 +118,6 @@ class LoginTest : KoinTest {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-
-    @Test
-    fun test_loginWithStoredCredentials_expired_failed() {
-        assert(false)
-
-    }
-
-    @Test
-    fun test_loginWithStoredCredentials_notExpired_success() {
-        assert(false)
     }
 
     private companion object {
